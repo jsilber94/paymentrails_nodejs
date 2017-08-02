@@ -22,8 +22,8 @@ The library is hosted at [insert github link]
 
 ```js
 // A simple NodeJS application using the Payment Rails SDK
-var PaymentRails_Recipient = require('./src/PaymentRails_Recipient');
-var Configuration = require('./src/Configuration');
+var PaymentRails_Recipient = require('/paymentrails/src/PaymentRails_Recipient');
+var Configuration = require('/paymentrails/src/Configuration');
 
 
 var callback = function (error, data, response) {
