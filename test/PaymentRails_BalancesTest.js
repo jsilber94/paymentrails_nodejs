@@ -1,5 +1,4 @@
 'use strict';
-//npm test to run in root folder
 var sinon = require('sinon');
 var Configuration = require('../src/Configuration');
 var PaymentRails_Balances = require('../src/PaymentRails_Balances');
@@ -9,9 +8,9 @@ var assert = require('assert');
 describe('Retrieve Balances', function () {
     it('ok field should be true yes', function (done) {
 
-         Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        Configuration.prototype.setApiKey('access-code'); Configuration.prototype.setApiSecret('secret-code');
         sinon.stub(PaymentRails_Balances, 'get').callsFake(() => {
-            return ("tttttttrue");
+            return ("{'ok':true,'balances':{}}");
         });
         var data = PaymentRails_Balances.get();
         assert.equal(data.substring(6, 10), 'true');
@@ -22,9 +21,9 @@ describe('Retrieve Balances', function () {
 
 describe('Retrieve paymentrails balance', function () {
     it('ok field should be true', function (done) {
-         Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        Configuration.prototype.setApiKey('access-code'); Configuration.prototype.setApiSecret('secret-code');
         sinon.stub(PaymentRails_Balances, 'get').withArgs('paymentrails').callsFake(() => {
-            return ("tttttttrue");
+            return ("{'ok':true,'balances':{}}");
         });
         var data = PaymentRails_Balances.get('paymentrails');
         assert.equal(data.substring(6, 10), 'true');
@@ -35,9 +34,9 @@ describe('Retrieve paymentrails balance', function () {
 
 describe('Retrieve paypal balances', function () {
     it('ok field should be true', function (done) {
-          Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        Configuration.prototype.setApiKey('access-code'); Configuration.prototype.setApiSecret('secret-code');
         sinon.stub(PaymentRails_Balances, 'get').withArgs('paypal').callsFake(() => {
-            return ("tttttttrue");
+            return ("{'ok':true,'balances':{}}");
         });
         var data = PaymentRails_Balances.get('paypal');
         assert.equal(data.substring(6, 10), 'true');

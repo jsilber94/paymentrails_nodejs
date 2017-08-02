@@ -1,5 +1,4 @@
 'use strict';
-//npm tets to run in root folder
 var sinon = require('sinon');
 var Configuration = require('../src/Configuration');
 var PaymentRails_RecipientAccounts = require('../src/PaymentRails_RecipientAccounts');
@@ -9,9 +8,9 @@ var assert = require('assert');
 describe('Retrieve payout method', function () {
     it('ok field should be true', function (done) {
 
-         Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        Configuration.prototype.setApiKey('access-code'); Configuration.prototype.setApiSecret('secret-code');
         sinon.stub(PaymentRails_RecipientAccounts, 'get').withArgs('R-91XPJZTR612MG').callsFake(() => {
-            return ("tttttttrue");
+            return ("{'ok':true,'account':{'type':'paypal','emailAddress':'sample@example.com','recipientAccountId':'A-3SaFeu7eMjj3vaBeoEcZED','primary':true,'currency':'USD'}}");
         });
         var data = PaymentRails_RecipientAccounts.get('R-91XPJZTR612MG');
         assert.equal(data.substring(6, 10), 'true');
@@ -23,9 +22,9 @@ describe('Retrieve payout method', function () {
 
 describe('Retrieve payout method Invalid Recipient id', function () {
     it('ok field should be false', function (done) {
-         Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        Configuration.prototype.setApiKey('access-code'); Configuration.prototype.setApiSecret('secret-code');
         sinon.stub(PaymentRails_RecipientAccounts, 'get').withArgs('R-123').callsFake(() => {
-            return ("ttttttfalse");
+            return ("{'ok':false,'errors':[{'code':'not_found','message':'Object not found'}]}");
         });
         var data = PaymentRails_RecipientAccounts.get('R-123');
         assert.equal(data.substring(6, 11), 'false');
@@ -54,9 +53,9 @@ describe('Create payout method', function () {
             }
         };
 
-         Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        Configuration.prototype.setApiKey('access-code'); Configuration.prototype.setApiSecret('secret-code');
         sinon.stub(PaymentRails_RecipientAccounts, 'post').withArgs('R-91XPMEHZ44RMP', body).callsFake(() => {
-            return ("tttttttrue");
+            return ("{'ok':true,'account':{'recipientAccountId':'A-SKQnB1eyJ1imqBftXq9Dqg','primary':true,'currency':'CAD','country':'CA','type':'bank-transfer','accountNum':'*******47','accountHolderName':'John Smith','branchId':'47261','bankId':'004','bankName':'THE TORONTO-DOMINION BANK'}}");
         });
         var data = PaymentRails_RecipientAccounts.post('R-91XPMEHZ44RMP', body);
         assert.equal(data.substring(6, 10), 'true');
@@ -84,9 +83,9 @@ describe('Create payout method invalid recipient id', function () {
                 }
             }
         };
-         Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        Configuration.prototype.setApiKey('access-code'); Configuration.prototype.setApiSecret('secret-code');
         sinon.stub(PaymentRails_RecipientAccounts, 'post').withArgs('R-123', body).callsFake(() => {
-            return ("ttttttfalse");
+            return ("{'ok':false,'errors':[{'code':'not_found','message':'Object not found'}]}");
         });
         var data = PaymentRails_RecipientAccounts.post('R-123', body);
         assert.equal(data.substring(6, 11), 'false');
@@ -109,9 +108,9 @@ describe('Update payout method', function () {
                 }
             }
         };
-         Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        Configuration.prototype.setApiKey('access-code'); Configuration.prototype.setApiSecret('secret-code');
         sinon.stub(PaymentRails_RecipientAccounts, 'patch').withArgs('R-91XPMEHZ44RMP', body).callsFake(() => {
-            return ("tttttttrue");
+            return ("{'ok':true,'object':'updated'}");
         });
         var data = PaymentRails_RecipientAccounts.patch('R-91XPMEHZ44RMP', body);
         assert.equal(data.substring(6, 10), 'true');
@@ -134,12 +133,12 @@ describe('Update payout method Invalid Recipient Id', function () {
                 }
             }
         };
-         Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        Configuration.prototype.setApiKey('access-code'); Configuration.prototype.setApiSecret('secret-code');
         sinon.stub(PaymentRails_RecipientAccounts, 'patch').withArgs('R-123', body).callsFake(() => {
-            return ("ttttttfalse");
+            return ("{'ok':false,'errors':[{'code':'not_found','message':'Object not found'}]}");
         });
         var data = PaymentRails_RecipientAccounts.patch('R-123', body);
-            assert.equal(data.substring(6, 11), 'false');
+        assert.equal(data.substring(6, 11), 'false');
         done();
         PaymentRails_RecipientAccounts.patch.restore();
     });
