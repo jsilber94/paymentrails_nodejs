@@ -24,14 +24,15 @@ module.exports = {
  * @param {function} callback
  */
 function get(endPoint, callback) {
-
+    timestamp = Math.round(new Date() / 1000);
     var options = {
         host: Configuration.prototype.getApiBase(),
         path: endPoint,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'x-api-key': Configuration.prototype.getApiKey()
+            'Authorization': Configuration.prototype.generateAuthorization(timestamp),
+            'X-PR-Timestamp': timestamp,
         }
     };
 
@@ -66,14 +67,15 @@ function get(endPoint, callback) {
  * @returns {The response}
  */
 function post(endPoint, body, callback) {
+    timestamp = Math.round(new Date() / 1000);
     var request = require('request');
-
     var options = {
         uri: 'http://' + Configuration.prototype.getApiBase() + endPoint,
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'x-api-key': Configuration.prototype.getApiKey()
+            'Authorization': Configuration.prototype.generateAuthorization(timestamp),
+            'X-PR-Timestamp': timestamp,
         },
         json: body
     };
@@ -92,22 +94,23 @@ function post(endPoint, body, callback) {
  */
 function patch(endPoint, body, callback) {
     var request = require('request');
-
+    timestamp = Math.round(new Date() / 1000);
 
     var options = {
-        uri: 'http://' + Configuration.prototype.getApiBase() + endPoint,
+        uri: endPoint,
+        baseUrl: 'http://' + Configuration.prototype.getApiBase(),
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-            'x-api-key': Configuration.prototype.getApiKey()
+            'Authorization': Configuration.prototype.generateAuthorization(timestamp),
+            'X-PR-Timestamp': timestamp,
         },
-        json: body
+        json: body,
     };
 
     request(options, function (error, response, body) {
         callback(error, JSON.stringify(body), response);
     });
-
 }
 
 /**
@@ -117,13 +120,15 @@ function patch(endPoint, body, callback) {
  * @returns {The response}
  */
 function remove(endPoint, callback) {
+    timestamp = Math.round(new Date() / 1000);
     var options = {
         host: Configuration.prototype.getApiBase(),
         path: endPoint,
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
-            'x-api-key': Configuration.prototype.getApiKey()
+            'Authorization': Configuration.prototype.generateAuthorization(timestamp),
+            'X-PR-Timestamp': timestamp,
         }
     };
 

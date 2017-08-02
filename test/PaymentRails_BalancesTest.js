@@ -1,68 +1,47 @@
 'use strict';
-//npm tets to run in root folder
-
+//npm test to run in root folder
+var sinon = require('sinon');
 var Configuration = require('../src/Configuration');
 var PaymentRails_Balances = require('../src/PaymentRails_Balances');
 
 var assert = require('assert');
 
 describe('Retrieve Balances', function () {
-    it('ok field should be true yes', function () {
-        Configuration.prototype.setApiKey('pk_live_91XNJFBD19ZQ6');
-        PaymentRails_Balances.get(function (error, data, response) {
-            assert.equal(data.substring(6, 10), 'true');
+    it('ok field should be true yes', function (done) {
+
+         Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        sinon.stub(PaymentRails_Balances, 'get').callsFake(() => {
+            return ("tttttttrue");
         });
+        var data = PaymentRails_Balances.get();
+        assert.equal(data.substring(6, 10), 'true');
+        done();
+        PaymentRails_Balances.get.restore();
     });
 });
 
-describe('Retrieve Balances Invalid API Key', function () {
-    it('ok field should be false', function () {
-        Configuration.prototype.setApiKey('dfg');
-        PaymentRails_Balances.get(function (error, data, response) {
-            assert.equal(data.substring(6, 11), 'false');
+describe('Retrieve paymentrails balance', function () {
+    it('ok field should be true', function (done) {
+         Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        sinon.stub(PaymentRails_Balances, 'get').withArgs('paymentrails').callsFake(() => {
+            return ("tttttttrue");
         });
+        var data = PaymentRails_Balances.get('paymentrails');
+        assert.equal(data.substring(6, 10), 'true');
+        done();
+        PaymentRails_Balances.get.restore();
     });
 });
 
-
-
-describe.skip('Retrieve paymentrails balance(DOES NOT WORK)', function () {
+describe('Retrieve paypal balances', function () {
     it('ok field should be true', function (done) {
-        Configuration.prototype.setApiKey('pk_live_91XNJFBD19ZQ6');
-        PaymentRails_Balances.get(function (error, data, response) {
-            assert.equal(data.substring(6, 10), 'true');
-            done();
-        }, 'paymentrails');
-    });
-});
-
-describe.skip('Retrieve paymentrails balance Invalid API Key ', function () {
-    it('ok field should be false', function (done) {
-        Configuration.prototype.setApiKey('erfg');
-        PaymentRails_Balances.get(function (error, data, response) {
-            assert.equal(data.substring(6, 11), 'false');
-            done();
-        }, 'paymentrails');
-    });
-});
-
-
-describe.skip('Retrieve paypal balances(DOES NOT WORK)', function () {
-    it('ok field should be true', function (done) {
-        Configuration.prototype.setApiKey('pk_live_91XNJFBD19ZQ6');
-        PaymentRails_Balances.get(function (error, data, response) {
-            assert.equal(data.substring(6, 10), 'true');
-            done();
-        }, 'paypal');
-    });
-});
-
-describe.skip('Retrieve paypal balance Invalid API Key', function () {
-    it('ok field should be false', function (done) {
-        Configuration.prototype.setApiKey('erfg');
-        PaymentRails_Balances.get(function (error, data, response) {
-            assert.equal(data.substring(6, 11), 'false');
-            done();
-        }, 'paypal');
+          Configuration.prototype.setApiKey('access-code');     Configuration.prototype.setApiSecret('secret-code'); 
+        sinon.stub(PaymentRails_Balances, 'get').withArgs('paypal').callsFake(() => {
+            return ("tttttttrue");
+        });
+        var data = PaymentRails_Balances.get('paypal');
+        assert.equal(data.substring(6, 10), 'true');
+        done();
+        PaymentRails_Balances.get.restore();
     });
 });

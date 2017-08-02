@@ -1,5 +1,5 @@
 var PaymentRails_Recipient = require('./src/PaymentRails_Recipient');
-var PaymentRails_PayoutMethods = require('./src/PaymentRails_PayoutMethods');
+var PaymentRails_RecipientAccounts = require('./src/PaymentRails_RecipientAccounts');
 var PaymentRails_Balances = require('./src/PaymentRails_Balances');
 var PaymentRails_Payment = require('./src/PaymentRails_Payment');
 var PaymentRails_Batch = require('./src/PaymentRails_Batch');
@@ -15,146 +15,128 @@ var callback = function (error, data, response) {
 };
 
 
-
-Configuration.prototype.setApiKey('pk_live_91XNJFBD19ZQ6');
-
-recipient(callback);
-
-//payoutMethods(callback);
-//batch(callback);
-//payment(callback);
-//balances(callback);
-
+// recipient(callback);
+// payoutMethods(callback);
+// balances(callback);
+// batch(callback);
+// payment(callback);
 
 
 function recipient(callback) {
-
-    PaymentRails_Recipient.get('R-91XPJZTR612MG', callback);
-
+    Configuration.prototype.setApiKey('ALJVaAj4EB4B2QQBENYZDNYW');
+    Configuration.prototype.setApiSecret('9x40t32d6acuy1jwvkwf02n5rakczk79thbq3tnr');
+    PaymentRails_Recipient.get('R-GbGnYCbmsSm6xHnYVyGW7J', callback);
 
     var body = {
         type: 'individual',
-        referenceId: 'U678912345',
-        email: 'Fred@llinstones.com',
+        referenceId: 'U6734f8912345',
+        email: 'philipsace@example.com',
         name: 'Fred Flinstones',
         lastName: 'Flinstones',
         firstName: 'Fred'
     };
-//PaymentRails_Recipient.post(body,callback);
+    // PaymentRails_Recipient.post(body, callback);
 
-    var body = {
-        firstName: 'George',
-        lastName: 'Jetson'
-    };
-//PaymentRails_Recipient.patch('R-91XPM8233T710', body, callback);
+    // var body = {
+    //     firstName: 'George',
+    //     lastName: 'Jetson'
+    // };
 
-//PaymentRails_Recipient.remove('R-91XPM8233T710',callback);
+    // PaymentRails_Recipient.patch('R-TwquaXsEknUtEtkkyigKLg', body, callback);
 
-//PaymentRails_Recipient.query(callback);
+    // PaymentRails_Recipient.remove('R-GbGnYCbmsSm6xHnYVyGW7J', callback);
 
-//PaymentRails_Recipient.get('R-91XPM8233T710',callback, 'logs');
+    // PaymentRails_Recipient.query(callback);
 
-//PaymentRails_Recipient.get('R-91XPM8233T710',callback, 'payments');
+    // PaymentRails_Recipient.get('R-GbGnYCbmsSm6xHnYVyGW7J', callback, 'logs');
+
+    // PaymentRails_Recipient.get('R-GbGnYCbmsSm6xHnYVyGW7J', callback, 'payments');
 }
-
 function payoutMethods(callback) {
 
-    PaymentRails_PayoutMethods.get('R-912PW016D02P8', callback);
+    Configuration.prototype.setApiKey('ALJVaAj4EB4B2QQBENYZDNYW');
+    Configuration.prototype.setApiSecret('9x40t32d6acuy1jwvkwf02n5rakczk79thbq3tnr');
+    PaymentRails_RecipientAccounts.get('R-PuzPJLVYQXBbPSMQKwmJ5G', 'A-KKHb8MpFvju6vDMBLPmtej', callback);
     var body = {
-        "primary": {
-            "method": "bank",
-            "currency": "CAD"
-        },
-        "accounts": {
-            "bank": {
-                "country": "CA",
-                "accountNum": "6022847",
-                "institution": "123",
-                "branchNum": "47261",
-                "currency": "CAD",
-                "name": "TD"
-            }
-        }
-    };
-    //   PaymentRails_PayoutMethods.post('R-91XPM78NF8QN6', body, callback);
+        "type": "bank-transfer",
+        "primary": "true",
+        "country": "CA",
+        "currency": "CAD",
+        "accountNum": "6022847",
+        "bankId": "004",
+        "branchId": "47261",
+        "accountHolderName": "John Smith"
+    }
+    PaymentRails_RecipientAccounts.post('R-PuzPJLVYQXBbPSMQKwmJ5G', body, callback);
 
     var body = {
-        "primary": {
-            "method": "paypal",
-            "currency": "CAD"
-        },
-        "accounts": {
-            "paypal": {
-                "address": "testpaypal@example.com"
-            }
-        }
-    };
-    //  PaymentRails_PayoutMethods.patch('R-91XPM78NF8QN6', body, callback);
+        "primary": "false",
+    }
+    PaymentRails_RecipientAccounts.patch('R-PuzPJLVYQXBbPSMQKwmJ5G', 'A-KKHb8MpFvju6vDMBLPmtej', body, callback);
 
 }
-
-function batch(callback) {
-    PaymentRails_Batch.get('B-912PWJGD8RZ7J', callback);
-    var body = {
-        "payments": [{
-                "recipient": {
-                    "id": "R-91XPJZTR612MG"
-                },
-                "sourceAmount": "65"
-            }],
-        "sourceCurrency": "USD"
-    };
-    // PaymentRails_Batch.post(callback, body);
-
-    // PaymentRails_Batch.generateQuote(callback, 'B-91XPMBTV29B76');
-
-    // PaymentRails_Batch.processBatch(callback, 'B-91XPMBTV29B76');
-
-
-
-
-
-
-
-    var body = {
-        "update_payments": [{
-                "id": "P-91XPMB3BC9PQY",
-                "sourceAmount": 999
-            }]
-    };
-    // PaymentRails_Batch.patch('B-912PWJGD8RZ7J', body, callback);
-
-    // PaymentRails_Batch.remove('B-91XPJKJ0F05KA', callback);
-
-    //  PaymentRails_Batch.query(callback);
-}
-
-function payment(callback) {
-
-    PaymentRails_Payment.setBatchId('B-912PWJGD8RZ7J');
-    // PaymentRails_Payment.get('P-91XPJV99EWX48', callback);
-
-    var body = {
-        "recipient": {
-            "id": "R-91XPET3C8WBJJ"
-        },
-        "sourceAmount": "100.10",
-        "memo": "Freelance payment"
-    };
-    //   PaymentRails_Payment.post('B-912PWJGD8RZ7J', body, callback);
-
-    var body = {"sourceAmount": "900.90"};
-    //PaymentRails_Payment.patch('P-91XPMB3BC9PQY', body, callback);
-
-    //   PaymentRails_Payment.setBatchId('B-91XPJKVGAD87R');
-    //   PaymentRails_Payment.remove('P-912PWFRD2R06J', callback);
-
-    PaymentRails_Payment.query(callback);
-}
-
 function balances(callback) {
+    Configuration.prototype.setApiKey('ALJVaAj4EB4B2QQBENYZDNYW');
+    Configuration.prototype.setApiSecret('9x40t32d6acuy1jwvkwf02n5rakczk79thbq3tnr');
 
     PaymentRails_Balances.get(callback, 'paypal');
     PaymentRails_Balances.get(callback, 'paymentrails');
     PaymentRails_Balances.get(callback);
+}
+function batch(callback) {
+    Configuration.prototype.setApiKey('ALJVaAj4EB4B2QQBENYZDNYW');
+    Configuration.prototype.setApiSecret('9x40t32d6acuy1jwvkwf02n5rakczk79thbq3tnr');
+    PaymentRails_Batch.get('B-3c8QoJMWZFJktmkutqMUBM', callback);
+
+    var body = {
+        "payments": [{
+            "recipient": {
+                "id": "R-PuzPJLVYQXBbPSMQKwmJ5G"
+            },
+            "sourceAmount": "65",
+            "sourceCurrency": "CAD"
+        }]
+    };
+    PaymentRails_Batch.post(callback, body);
+
+    PaymentRails_Batch.generateQuote(callback, 'B-3c8QoJMWZFJktmkutqMUBM');
+
+    PaymentRails_Batch.processBatch(callback, 'B-3c8QoJMWZFJktmkutqMUBM');
+
+    var body = {
+        "update_payments": [{
+            "id": "P-L51umK3ieSpBty3uCsFtzK",
+            "sourceAmount": 999
+        }]
+    };
+    PaymentRails_Batch.patch('B-3c8QoJMWZFJktmkutqMUBM', body, callback);
+
+    PaymentRails_Batch.remove('B-3c8QoJMWZFJktmkutqMUBM', callback);
+
+    PaymentRails_Batch.query(callback);
+}
+function payment(callback) {
+
+    Configuration.prototype.setApiKey('ALJVaAj4EB4B2QQBENYZDNYW');
+    Configuration.prototype.setApiSecret('9x40t32d6acuy1jwvkwf02n5rakczk79thbq3tnr');
+    PaymentRails_Payment.setBatchId('B-LfoeSofUYdPpZBULbezULe');
+    PaymentRails_Payment.get('P-RNNZME2kkuAKqiiz6iTFrX', callback);
+
+    var body = {
+        "recipient": {
+            "id": "R-PuzPJLVYQXBbPSMQKwmJ5G"
+        },
+        "sourceAmount": "100.10",
+        "sourceCurrency": "CAD",
+        "memo": "Freelance payment"
+    };
+    PaymentRails_Payment.post('B-LfoeSofUYdPpZBULbezULe', body, callback);
+
+    var body = { "sourceAmount": "900.90" };
+    PaymentRails_Payment.patch('P-RNNZME2kkuAKqiiz6iTFrX', body, callback);
+
+    PaymentRails_Payment.setBatchId('B-LfoeSofUYdPpZBULbezULe');
+    PaymentRails_Payment.remove('P-RNNZME2kkuAKqiiz6iTFrX', callback);
+
+    PaymentRails_Payment.query(callback);
 }

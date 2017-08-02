@@ -1,5 +1,5 @@
 var PaymentRails_Client = require('./PaymentRails_Client');
-
+var Configuration = require('./Configuration');
 var batchId;
 
 module.exports = {
@@ -30,8 +30,9 @@ module.exports = {
  * @param {function} callback
  */
 function get(paymentId, callback) {
-    // var endPoint = '/v1/batches/' + batchId + '/payments/' + paymentId;
     var endPoint = '/v1/payments/' + paymentId;
+    Configuration.prototype.setMethod('GET');
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.get(endPoint, callback);
 }
 
@@ -43,6 +44,9 @@ function get(paymentId, callback) {
  */
 function post(batchId, body, callback) {
     var endPoint = '/v1/batches/' + batchId + '/payments';
+    Configuration.prototype.setMethod('POST');
+    Configuration.prototype.setBody(body);
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.post(endPoint, body, callback);
 }
 /**
@@ -53,6 +57,9 @@ function post(batchId, body, callback) {
  */
 function patch(paymentId, body, callback) {
     var endPoint = '/v1/batches/' + batchId + '/payments/' + paymentId;
+    Configuration.prototype.setMethod('PATCH');
+    Configuration.prototype.setBody(body);
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.patch(endPoint, body, callback);
 }
 /**
@@ -62,6 +69,8 @@ function patch(paymentId, body, callback) {
  */
 function remove(paymentId, callback) {
     var endPoint = '/v1/batches/' + batchId + '/payments/' + paymentId;
+    Configuration.prototype.setMethod('DELETE');
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.remove(endPoint, callback);
 }
 
@@ -75,6 +84,8 @@ function remove(paymentId, callback) {
  */
 function query(callback, page, pageSize, search) {
     var endPoint = '/v1/batches/' + batchId + '/payments/?' + '&search=' + search + '&page=' + page + '&pageSize=' + pageSize;
+    Configuration.prototype.setMethod('GET');
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.get(endPoint, callback);
 
 

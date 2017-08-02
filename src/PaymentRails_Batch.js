@@ -1,4 +1,5 @@
 var PaymentRails_Client = require('./PaymentRails_Client');
+var Configuration = require('./Configuration');
 
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
     },
     generateQuote: function (callback, batchId) {
         var endPoint = batchId + '/generate-quote';
-        post(callback, '', endPoint);
+        post(callback, "", endPoint);
     },
     processBatch: function (callback, batchId) {
         var endPoint = batchId + '/start-processing';
@@ -33,8 +34,9 @@ module.exports = {
  * @param {function} callback
  */
 function get(batchId, callback) {
-
     var endPoint = '/v1/batches/' + batchId;
+    Configuration.prototype.setMethod('GET');
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.get(endPoint, callback);
 }
 
@@ -48,6 +50,10 @@ function get(batchId, callback) {
  */
 function post(callback, body, batchId) {
     var endPoint = '/v1/batches/' + batchId;
+    console.log(endPoint)
+    Configuration.prototype.setMethod('POST');
+    if (body !== "") { Configuration.prototype.setBody(body) };
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.post(endPoint, body, callback);
 }
 
@@ -60,6 +66,9 @@ function post(callback, body, batchId) {
  */
 function patch(batchId, body, callback) {
     var endPoint = '/v1/batches/' + batchId;
+    Configuration.prototype.setMethod('PATCH');
+    Configuration.prototype.setBody(body);
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.patch(endPoint, body, callback);
 }
 
@@ -70,6 +79,8 @@ function patch(batchId, body, callback) {
  */
 function remove(batchId, callback) {
     var endPoint = '/v1/batches/' + batchId;
+    Configuration.prototype.setMethod('DELETE');
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.remove(endPoint, callback);
 }
 
@@ -83,6 +94,8 @@ function remove(batchId, callback) {
  */
 function query(callback, page, pageSize, search) {
     var endPoint = '/v1/batches/?' + '&search=' + search + '&page=' + page + '&pageSize=' + pageSize;
+    Configuration.prototype.setMethod('GET');
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.get(endPoint, callback);
 }
 

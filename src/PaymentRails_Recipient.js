@@ -1,4 +1,5 @@
 var PaymentRails_Client = require('./PaymentRails_Client');
+var Configuration = require('./Configuration');
 
 module.exports = {
     get: function (recipientId, callback, term = '') {
@@ -26,8 +27,9 @@ module.exports = {
  * @param {String} term
  */
 function get(recipientId, callback, term) {
-   
     var endPoint = '/v1/recipients/' + recipientId + '/' + term;
+    Configuration.prototype.setMethod('GET');
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.get(endPoint, callback);
 }
 /**
@@ -37,6 +39,9 @@ function get(recipientId, callback, term) {
  */
 function post(body, callback) {
     var endPoint = '/v1/recipients/';
+    Configuration.prototype.setMethod('POST');
+    Configuration.prototype.setBody(body);
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.post(endPoint, body, callback);
 }
 /**
@@ -48,6 +53,9 @@ function post(body, callback) {
  */
 function patch(recipientId, body, callback) {
     var endPoint = '/v1/recipients/' + recipientId;
+    Configuration.prototype.setMethod('PATCH');
+    Configuration.prototype.setBody(body);
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.patch(endPoint, body, callback);
 }
 /**
@@ -57,6 +65,8 @@ function patch(recipientId, body, callback) {
  */
 function remove(recipientId, callback) {
     var endPoint = '/v1/recipients/' + recipientId;
+    Configuration.prototype.setMethod('DELETE');
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.remove(endPoint, callback);
 }
 /**
@@ -69,6 +79,8 @@ function remove(recipientId, callback) {
  */
 function query(page, pageSize, search, callback) {
     var endPoint = '/v1/recipients/?' + '&search=' + search + '&page=' + page + '&pageSize=' + pageSize;
+    Configuration.prototype.setMethod('GET');
+    Configuration.prototype.setEndPoint(endPoint);
     PaymentRails_Client.get(endPoint, callback);
 
 
