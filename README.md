@@ -12,11 +12,6 @@ For more information about the API as well as NodeJS code samples check out the 
 #### For [NodeJS](https://nodejs.org/en/)
 
 #
-#### To install the reference: 
-In Solution Explorer, right-click the project node and click Add Reference.
-
-
-The library is hosted at [insert github link]
 
 ## Getting Started
 
