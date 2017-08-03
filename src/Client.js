@@ -1,4 +1,4 @@
-var http = require('http');
+var https = require('https');
 var Configuration = require('./Configuration');
 
 
@@ -36,7 +36,7 @@ function get(endPoint, callback) {
         }
     };
 
-    var req = http.get(options, function (res) {
+    var req = https.get(options, function (res) {
         var bodyChunks = [];
         res.on('data', function (chunk) {
             bodyChunks.push(chunk);
@@ -67,7 +67,7 @@ function post(endPoint, body, callback) {
     timestamp = Math.round(new Date() / 1000);
     var request = require('request');
     var options = {
-        uri: 'http://' + Configuration.prototype.getApiBase() + endPoint,
+        uri: 'https://' + Configuration.prototype.getApiBase() + endPoint,
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function patch(endPoint, body, callback) {
 
     var options = {
         uri: endPoint,
-        baseUrl: 'http://' + Configuration.prototype.getApiBase(),
+        baseUrl: 'https://' + Configuration.prototype.getApiBase(),
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ function remove(endPoint, callback) {
         }
     };
 
-    var req = http.get(options, function (res) {
+    var req = https.get(options, function (res) {
         var bodyChunks = [];
         res.on('data', function (chunk) {
             bodyChunks.push(chunk);
