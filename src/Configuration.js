@@ -3,7 +3,7 @@ var apiSecret;
 var method;
 var endPoint;
 var body = '';
-var apiBase = 'api.railz.io';
+var apiBase = 'api.paymentrails.com';
 var crypto = require('crypto');
 
 function Configuration() {
