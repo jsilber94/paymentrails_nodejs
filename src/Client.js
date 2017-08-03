@@ -52,7 +52,6 @@ function get(endPoint, callback) {
 
     req.on('error', function (e) {
         console.log('ERROR: ' + e.message);
-        throw new Exception('Error');
     });
 
 }
@@ -141,8 +140,6 @@ function remove(endPoint, callback) {
             body = Buffer.concat(bodyChunks);
             callback(res.error, body + '', res);
         });
-
-
     });
 
 
