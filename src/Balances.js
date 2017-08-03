@@ -1,4 +1,4 @@
-var PaymentRails_Client = require('./PaymentRails_Client');
+var Client = require('./Client');
 var Configuration = require('./Configuration');
 
 module.exports = {
@@ -16,5 +16,5 @@ function get(callback, term = '') {
     var endPoint = '/v1/profile/balances/' + term;
     Configuration.prototype.setMethod('GET');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.get(endPoint, callback);
+    Client.get(endPoint, callback);
 }

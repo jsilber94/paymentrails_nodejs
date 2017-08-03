@@ -37,10 +37,8 @@ function get(endPoint, callback) {
     };
 
     var req = http.get(options, function (res) {
-        // Buffer the body entirely for processing as a whole.
         var bodyChunks = [];
         res.on('data', function (chunk) {
-            // You can process streamed parts here...
             bodyChunks.push(chunk);
         });
         var body;
@@ -133,10 +131,8 @@ function remove(endPoint, callback) {
     };
 
     var req = http.get(options, function (res) {
-        // Buffer the body entirely for processing as a whole.
         var bodyChunks = [];
         res.on('data', function (chunk) {
-            // You can process streamed parts here...
             bodyChunks.push(chunk);
         });
         var body;

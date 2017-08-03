@@ -1,4 +1,4 @@
-var PaymentRails_Client = require('./PaymentRails_Client');
+var Client = require('./Client');
 var Configuration = require('./Configuration');
 
 
@@ -37,7 +37,7 @@ function get(batchId, callback) {
     var endPoint = '/v1/batches/' + batchId;
     Configuration.prototype.setMethod('GET');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.get(endPoint, callback);
+    Client.get(endPoint, callback);
 }
 
 /**
@@ -54,7 +54,7 @@ function post(callback, body, batchId) {
     Configuration.prototype.setMethod('POST');
     if (body !== "") { Configuration.prototype.setBody(body) };
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.post(endPoint, body, callback);
+    Client.post(endPoint, body, callback);
 }
 
 /**
@@ -69,7 +69,7 @@ function patch(batchId, body, callback) {
     Configuration.prototype.setMethod('PATCH');
     Configuration.prototype.setBody(body);
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.patch(endPoint, body, callback);
+    Client.patch(endPoint, body, callback);
 }
 
 /**
@@ -81,7 +81,7 @@ function remove(batchId, callback) {
     var endPoint = '/v1/batches/' + batchId;
     Configuration.prototype.setMethod('DELETE');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.remove(endPoint, callback);
+    Client.remove(endPoint, callback);
 }
 
 /**
@@ -96,7 +96,7 @@ function query(callback, page, pageSize, search) {
     var endPoint = '/v1/batches/?' + '&search=' + search + '&page=' + page + '&pageSize=' + pageSize;
     Configuration.prototype.setMethod('GET');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.get(endPoint, callback);
+    Client.get(endPoint, callback);
 }
 
 

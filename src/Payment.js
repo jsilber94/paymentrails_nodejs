@@ -1,4 +1,4 @@
-var PaymentRails_Client = require('./PaymentRails_Client');
+var Client = require('./Client');
 var Configuration = require('./Configuration');
 var batchId;
 
@@ -33,7 +33,7 @@ function get(paymentId, callback) {
     var endPoint = '/v1/payments/' + paymentId;
     Configuration.prototype.setMethod('GET');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.get(endPoint, callback);
+    Client.get(endPoint, callback);
 }
 
 /**
@@ -47,7 +47,7 @@ function post(batchId, body, callback) {
     Configuration.prototype.setMethod('POST');
     Configuration.prototype.setBody(body);
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.post(endPoint, body, callback);
+    Client.post(endPoint, body, callback);
 }
 /**
  * Updates a payment based on the payment id
@@ -60,7 +60,7 @@ function patch(paymentId, body, callback) {
     Configuration.prototype.setMethod('PATCH');
     Configuration.prototype.setBody(body);
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.patch(endPoint, body, callback);
+    Client.patch(endPoint, body, callback);
 }
 /**
  * Delete a payment based on the paymentId id
@@ -71,7 +71,7 @@ function remove(paymentId, callback) {
     var endPoint = '/v1/batches/' + batchId + '/payments/' + paymentId;
     Configuration.prototype.setMethod('DELETE');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.remove(endPoint, callback);
+    Client.remove(endPoint, callback);
 }
 
 /**
@@ -86,7 +86,7 @@ function query(callback, page, pageSize, search) {
     var endPoint = '/v1/batches/' + batchId + '/payments/?' + '&search=' + search + '&page=' + page + '&pageSize=' + pageSize;
     Configuration.prototype.setMethod('GET');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.get(endPoint, callback);
+    Client.get(endPoint, callback);
 
 
 }

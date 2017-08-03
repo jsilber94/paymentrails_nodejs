@@ -1,4 +1,4 @@
-var PaymentRails_Client = require('./PaymentRails_Client');
+var Client = require('./Client');
 var Configuration = require('./Configuration');
 
 module.exports = {
@@ -24,7 +24,7 @@ function get(recipientId, recipientAccountId, callback) {
     var endPoint = '/v1/recipients/' + recipientId + '/accounts/' + recipientAccountId;
     Configuration.prototype.setMethod('GET');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.get(endPoint, callback);
+    Client.get(endPoint, callback);
 }
 /**
  * Creates a payout method based on the body and recipient id
@@ -37,7 +37,7 @@ function post(recipientId, body, callback) {
     Configuration.prototype.setMethod('POST');
     Configuration.prototype.setBody(body);
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.post(endPoint, body, callback);
+    Client.post(endPoint, body, callback);
 }
 
 /**
@@ -52,7 +52,7 @@ function patch(recipientId, recipientAccountId, body, callback) {
     Configuration.prototype.setMethod('PATCH');
     Configuration.prototype.setBody(body);
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.patch(endPoint, body, callback);
+    Client.patch(endPoint, body, callback);
 }
 
 

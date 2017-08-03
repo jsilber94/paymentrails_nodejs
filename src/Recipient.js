@@ -1,4 +1,4 @@
-var PaymentRails_Client = require('./PaymentRails_Client');
+var Client = require('./Client');
 var Configuration = require('./Configuration');
 
 module.exports = {
@@ -30,7 +30,7 @@ function get(recipientId, callback, term) {
     var endPoint = '/v1/recipients/' + recipientId + '/' + term;
     Configuration.prototype.setMethod('GET');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.get(endPoint, callback);
+    Client.get(endPoint, callback);
 }
 /**
  * Creates a recipient based on the body given to the client
@@ -42,7 +42,7 @@ function post(body, callback) {
     Configuration.prototype.setMethod('POST');
     Configuration.prototype.setBody(body);
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.post(endPoint, body, callback);
+    Client.post(endPoint, body, callback);
 }
 /**
  * Updates a recipient based on the body given to the client
@@ -56,7 +56,7 @@ function patch(recipientId, body, callback) {
     Configuration.prototype.setMethod('PATCH');
     Configuration.prototype.setBody(body);
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.patch(endPoint, body, callback);
+    Client.patch(endPoint, body, callback);
 }
 /**
  * Delete a recipient based on the recipient id
@@ -67,7 +67,7 @@ function remove(recipientId, callback) {
     var endPoint = '/v1/recipients/' + recipientId;
     Configuration.prototype.setMethod('DELETE');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.remove(endPoint, callback);
+    Client.remove(endPoint, callback);
 }
 /**
  * List all recipients based on the recipient id and
@@ -81,7 +81,7 @@ function query(page, pageSize, search, callback) {
     var endPoint = '/v1/recipients/?' + '&search=' + search + '&page=' + page + '&pageSize=' + pageSize;
     Configuration.prototype.setMethod('GET');
     Configuration.prototype.setEndPoint(endPoint);
-    PaymentRails_Client.get(endPoint, callback);
+    Client.get(endPoint, callback);
 
 
 }
