@@ -69,5 +69,5 @@ function remove(recipientId, recipientAccountId, callback) {
     var endPoint = '/v1/recipients/' + recipientId + '/accounts/' + recipientAccountId;
     Configuration.prototype.setMethod('DELETE');
     Configuration.prototype.setEndPoint(endPoint);
-    Client.remove(endPoint, body, callback);
+    Client.remove(endPoint, callback);
 }
