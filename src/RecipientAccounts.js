@@ -11,7 +11,7 @@ module.exports = {
     patch: function (recipientId, body, recipientAccountId, callback) {
         patch(recipientId, body, recipientAccountId, callback);
     },
-    remove: function() {
+    remove: function (recipientId, recipientAccountId, callback) {
         remove(recipientId, recipientAccountId, callback);
     }
 };
