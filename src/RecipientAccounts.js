@@ -10,11 +10,14 @@ module.exports = {
     },
     patch: function (recipientId, body, recipientAccountId, callback) {
         patch(recipientId, body, recipientAccountId, callback);
+    },
+    remove: function() {
+        remove(recipientId, recipientAccountId, callback);
     }
 };
 
 /**
- * Retrieves the payout method based on the recipient id  
+ * Retrieves the payout method based on the recipient id
  * @param {String} recipientId
  * @param {String} recipientAccountId
  * @param {function} callback
@@ -55,6 +58,16 @@ function patch(recipientId, recipientAccountId, body, callback) {
     Client.patch(endPoint, body, callback);
 }
 
-
-
-
+/**
+ * Delete a payout method based on the recipient id
+ * @param {String} recipientId
+ * @param {array} body
+ * @param {String} recipientAccountId
+ * @param {function} callback
+ */
+function remove(recipientId, recipientAccountId, callback) {
+    var endPoint = '/v1/recipients/' + recipientId + '/accounts/' + recipientAccountId;
+    Configuration.prototype.setMethod('DELETE');
+    Configuration.prototype.setEndPoint(endPoint);
+    Client.remove(endPoint, body, callback);
+}

@@ -28,3 +28,10 @@ Parameters | Return Type
 --- | ---:
 (recipientId, recipientAccountId, body, callback) | callback
 
+---
+### **remove**
+Utility method to make DELETE requests to the payout method API
+
+Parameters | Return Type
+--- | ---:
+(recipientId, recipientAccountId, callback) | callback
